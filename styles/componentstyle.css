@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+.dark {
+    background-color: #333;
+    color: #ccc;
+}
+
+.contrast {
+    background-color: #000;
+    color: #fff;
+}
+
+.light {
+    background-color: #ddd;
+    color: #333;
+}
+
+.course-card {
+    --default-shadow-color: #aaa2;
+    --default-text-shadow: 1vmin 1vmin 1vmin var(--default-shadow-color);
+    --default-box-shadow: 1vmin 1vmin 1vmin var(--default-shadow-color);
+    --default-background-color: #f00;
+    --default-margin: 3vmin;
+    --background-color-primary: #777;
+    --background-color-secondary: #aaa;
+
+    display: grid;
+    grid-template-areas: "cntr";
+
+    margin: var(--default-margin);
+    padding: 1vmin;
+
+    font-family: Quicksand, Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3vmin;
+
+    border: 0;
+    border-radius: 2vmin;
+
+    box-shadow: var(--default-box-shadow);
+    text-shadow: var(--default-text-shadow);
+
+    overflow: hidden;
+
+}
+
+#baseButton {
+    display: none;
+}
+
+.course-card-maintext {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+
+}
+
+#baseButton+label {
+    width: 100%;
+    grid-area: cntr;
+    cursor: pointer;
+}
+
+.course-card-action-menu-item {
+    flex: 1 1;
+    flex-basis: 100px;
+    cursor: pointer;
+
+}
+
+.courseId,
+.courseName {
+    padding: 0;
+    margin: 1vw;
+}
+
+.courseId {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.courseName {
+    overflow: hidden;
+    width: 100%;
+    White-space: pre;
+}
+
+
+#baseButton:checked+label .courseName {
+    animation-name: courseTextClick;
+    animation-duration: 0.2s;
+    width: 0;
+    margin: 1vw;
+    padding: 0;
+}
+
+
+.course-card-action-menu {
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    width: 0;
+    justify-content: flex-end;
+}
+
+#baseButton:checked+label .course-card-action-menu {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+@keyframes courseTextClick {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+div[data-type] {
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+div[data-type="mainAction"] {
+    margin: 1px;
+    background-color: var(--background-color-primary);
+}
+
+div[data-type="secondaryAction"] {
+    margin: 1px;
+    background-color: var(--background-color-secondary);
+
+
+}

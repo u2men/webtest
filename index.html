@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web components</title>
+    <script src="components/course-card.js" type="module"></script>
+    <script src="components/course-card-with-menu.js" type="module"></script>
+    <script src="components/course-card-actionButton.js" type="module"></script>
+    <script src="components/course-card-actionButtonDiv.js" type="module"></script>
+
+    <script src="components/mng-news.js" type="module"></script>
+
+    <style>
+        :root {
+            --default-shadow-color: #aaa2;
+        }
+
+        .course-card {
+            --default-shadow-color: #aaa2;
+            --default-text-shadow: 1vmin 1vmin 1vmin var(--default-shadow-color);
+            --default-box-shadow: 1vmin 1vmin 1vmin var(--default-shadow-color);
+            --default-background-color: #eee;
+
+            display: flex;
+            flex-flow: row nowrap;
+            margin: 0;
+            padding: 1vmin;
+
+            background-color: var(--default-background-color);
+
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 3vmin;
+
+            border: 0;
+            border-radius: 2vmin;
+
+            box-shadow: var(--default-box-shadow);
+            text-shadow: var(--default-text-shadow);
+
+
+        }
+
+        .courseId,
+        .courseName {
+            padding: 0;
+            margin: 3vw;
+        }
+
+        .courseId {
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .courseName {}
+
+        .actionMenu {
+            animation-name: ShowActionMenu;
+            animation-duration: 1s;
+            width: 0;
+            overflow: hidden;
+        }
+
+        @keyframes ShowActionMenu {
+
+            to {
+                width: 10vw;
+            }
+        }
+
+        button {
+            font-size: 2rem;
+            padding: 1vmax;
+            margin: 1vmax;
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <mng-news txt="Click me"></mng-news>
+    <mng-news txt="Дар"></mng-news>
+    <mng-news txt="Press"></mng-news>
+
+    <div class="course-card">
+        <div class="courseId">ICS302</div>
+        <div class="courseName">Web development</div>
+    </div>
+    <div class="course-card">
+        <img src="" alt="">
+        <div class="courseId">ICS303</div>
+        <div class="courseName">Web development</div>
+        <div class="actionMenu">
+            <div><span class="oi oi-info"></span></div>
+            <div>...</div>
+        </div>
+    </div>
+    <div class="course-card">
+        <img src="" alt="">
+        <div class="courseId">ICS304</div>
+        <div class="courseName">Web development</div>
+        <div class="actionMenu">
+            <div><span class="oi oi-info"></span></div>
+            <div>...</div>
+        </div>
+    </div>
+
+
+    <!-- classes: dark | contast | light -->
+    <course-card courseId="Math101" classes="dark" courseName="Математик1"></course-card>
+    <course-card courseId="Math102" classes="contrast" courseName="Математик2"></course-card>
+    <course-card courseId="Math103" classes="light" courseName="Математик3"></course-card>
+    <course-card courseId="Math104" courseName="Математик4"></course-card>
+
+    <course-card-with-menu courseId="Math101" classes="dark" courseName="Математик Монгол хэлний">
+
+        <course-card-action-button slot="actionButtons" buttonId="infoButton" text="Info" type="mainAction">
+        </course-card-action-button>
+        <course-card-action-button slot="actionButtons" buttonId="scheduleButton" text="Schedule"
+            type="secondayrAction"></course-card-action-button>
+
+    </course-card-with-menu>
+
+    <course-card-action-button slot="actionButtons" buttonId="infoButton" text="Info" type="mainAction">
+    </course-card-action-button>
+    <div is="course-card-actionbuttondiv" buttonId="scheduleButton" text="Schedule" type="secondaryAction">
+    </div>
+
+
+
+    <div id="courseCards"></div>
+    <script type="module">
+        import CourseCardWithMenu from './components/course-card-with-menu.js';
+
+        let courses = [
+            { id: "MATH101", name: "Mathematics 101", cr: "3", teachers: [{ id: 1, name: "Gerelee", prefix: "Dr." }, { id: 2, name: "John", prefix: "PhD" }] },
+            { id: "MATH102", name: "Mathematics 102", cr: "3", teachers: [{ id: 1, name: "Gerelee", prefix: "Dr." }, { id: 2, name: "John", prefix: "PhD" }] },
+            { id: "MATH103", name: "Mathematics 103", cr: "3", teachers: [{ id: 1, name: "Gerelee", prefix: "Dr." }, { id: 2, name: "John", prefix: "PhD" }] },
+            { id: "MATH104", name: "Mathematics 104", cr: "3", teachers: [{ id: 1, name: "Gerelee", prefix: "Dr." }, { id: 2, name: "John", prefix: "PhD" }] },
+            { id: "MATH105", name: "Mathematics 105", cr: "3", teachers: [{ id: 1, name: "Gerelee", prefix: "Dr." }, { id: 2, name: "John", prefix: "PhD" }] },
+        ]
+
+        courses.map(crs => {
+
+            let ccwm = new CourseCardWithMenu();
+            ccwm.courseId = crs.id;
+            ccwm.courseName = crs.name;
+            ccwm.classes = "dark";
+            ccwm.actions = [
+                {
+                    'type': 'mainAction',
+                    'text': 'Info',
+                    'id': `'infoButton_${crs.id}'`
+                },
+                {
+                    'type': 'secondaryAction',
+                    'text': 'Schedule',
+                    'id': `'scheduleButton_${crs.id}'`
+                }];
+
+
+            ccwm.addEventListener('actionButtonClicked', event => {
+                alert(`element: ${event.detail.el} - button: ${event.detail.button}`);
+            });
+
+            document.getElementById("courseCards").appendChild(ccwm);
+        })
+
+
+    </script>
+
+<label for="a1" style="display: inline-block;">Tab1</label>
+<label for="a2" style="display:inline-block">Tab2</label>
+<div class="tab-contents">
+    <!-- tab1 -->
+    <input type="radio" value="a1" id="a1" name="a" class="tab">
+    <div class="tab-content">tab1 content</div>
+    
+    <!-- tab2 -->
+    <input type="radio" value="a2" id="a2" name="a" class="tab">
+    <div class="tab-content">tab2 content</div>
+
+</div>
+<style>
+
+.tab {display:none;}   
+.tab + .tab-content{
+display:none;
+opacity: 0;
+}
+
+.tab:checked + .tab-content {
+    display: inline-block;
+    animation-name: courseTextClick;
+    animation-duration: 2s;
+    opacity: 1;
+}
+
+ @keyframes courseTextClick{
+        0% {opacity:0;}
+        100% {opacity:1;}
+        }
+</style>
+</body>
+
+</html>
