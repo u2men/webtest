@@ -1,0 +1,81 @@
+{
+  "id": "/subscriptions/714f23a4-7a5b-49c2-8623-a8353c61cd7b/resourceGroups/StaticWebAppResourceGroup/providers/Microsoft.Resources/deployments/Microsoft.Web-StaticApp-Portal-da273737-8973",
+  "name": "Microsoft.Web-StaticApp-Portal-da273737-8973",
+  "type": "Microsoft.Resources/deployments",
+  "tags": {
+    "primaryResourceId": "/subscriptions/714f23a4-7a5b-49c2-8623-a8353c61cd7b/resourcegroups/StaticWebAppResourceGroup/providers/Microsoft.Web/staticSites/WebApp",
+    "marketplaceItemId": "Microsoft.StaticApp"
+  },
+  "properties": {
+    "templateHash": "6229014380376126991",
+    "parameters": {
+      "name": {
+        "type": "String",
+        "value": "WebApp"
+      },
+      "location": {
+        "type": "String",
+        "value": "eastasia"
+      },
+      "sku": {
+        "type": "String",
+        "value": "Free"
+      },
+      "skucode": {
+        "type": "String",
+        "value": "Free"
+      },
+      "repositoryUrl": {
+        "type": "String",
+        "value": "https://github.com/u2men/webtest"
+      },
+      "branch": {
+        "type": "String",
+        "value": "master"
+      },
+      "repositoryToken": {
+        "type": "SecureString"
+      },
+      "appLocation": {
+        "type": "String",
+        "value": "/"
+      },
+      "apiLocation": {
+        "type": "String",
+        "value": ""
+      },
+      "appArtifactLocation": {
+        "type": "String",
+        "value": ""
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Succeeded",
+    "timestamp": "2021-12-20T10:35:04.9004278Z",
+    "duration": "PT7.5341645S",
+    "correlationId": "59b403c2-3c87-4090-a2cd-dce66765bde9",
+    "providers": [
+      {
+        "namespace": "Microsoft.Web",
+        "resourceTypes": [
+          {
+            "resourceType": "staticSites",
+            "locations": [
+              "eastasia"
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [],
+    "outputResources": [
+      {
+        "id": "/subscriptions/714f23a4-7a5b-49c2-8623-a8353c61cd7b/resourceGroups/StaticWebAppResourceGroup/providers/Microsoft.Web/staticSites/WebApp"
+      }
+    ],
+    "validationLevel": "Template"
+  }
+}
